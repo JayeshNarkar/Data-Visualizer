@@ -2,6 +2,33 @@
 
 This Django project, named **Data Visualizer**, aims to provide a platform for data visualization and analytics. Leveraging Django's capabilities, it offers functionalities for user authentication, data management, and visualization.
 
+## Preview
+
+
+#### Register
+![Register image](ignore/Register.png)
+
+
+#### Login
+![Login image](ignore/Login.png)
+
+
+#### Pre built index
+![Pre built index image](ignore/Data.1.png)
+
+
+#### Upload
+![Upload image](ignore/Data.2.png)
+
+
+#### After upload
+![After upload image](ignore/Data.3.png)
+
+
+#### User given csv index
+![User Index image](ignore/Data.4.png)
+
+
 ## Installation
 
 To set up this project locally, follow these steps:

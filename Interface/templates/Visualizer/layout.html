@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="{% static 'Interface/logo.png' %}">
+    <link href="{% static 'Interface/output.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Data Visualizer - {% block title %}{% endblock %}</title>
+  </head>
+  <body style="background-color: #1b2033; oswald">
+    <nav class="py-2 flex border-b border-b-gray-300" style="background-image: linear-gradient(to right, #2b2d43 05%, #494b5f 90%);" >
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="{% url 'index' %}" class="text-white text-lg font-semibold ml-2">
+          <img src="{% static 'Interface/logo.png' %}" alt="Icon" class="h-10 mr-2" />
+        </a>
+        <ul class="flex space-x-4 items- oswald">
+          <li class="hidden md:block"><a href="{% url 'index' %}" class="ft-big text-white hover:text-gray-300">Home</a></li>
+          <li class="hidden md:block"><a href="#" class="ft-big text-white hover:text-gray-300">About</a></li>
+          <li class="hidden md:block"><a href="{% url 'logout' %}" class="ft-big text-white hover:text-gray-300">Logout</a></li>
+          <li class="md:hidden">
+            <button class="text-white focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="hidden md:block">
+            <a href="#">
+              <img id="profileImageTag" alt="profile image" class="h-10 rounded-full"></img>
+            </a>
+          </li>
+          <li class="hidden md:block" style="color:gray;"><a class="ft-big mr-3">{{ user.username }}</a></li>
+        </ul>
+      </div>
+    </nav>
+  <div class="flex h-screen bg-gray-200">
+    <div class="text-white w-12" style="background-color:#2b2d43;">
+      <!-- Sidebar content -->
+      <div class="ml-4">
+        <!-- Your sidebar elements go here -->
+        <ul class="mt-4">
+          <li class="py-2"><a href="{% url 'upload' %}"><i class="fas fa-upload"></a></i></li>
+          <li class="py-2"><a href="#"><i class="fas fa-toolbox"></a></i></li>
+          <li class="py-2"><a href="#"><i class="fas fa-cog"></i></a></li>
+          <!-- Add more sidebar items as needed -->
+        </ul>
+      </div>
+    </div>
+    <div class="container mx-auto flex-1" style="background-color:#201e34;">
+      {% block content %}{% endblock %}
+    </div> 
+  </div> 
+  <script>
+    const username = '{{ user.username }}'
+    const user_id = {{ user.id }}
+    const baseUrl = "{{ request.scheme }}://{{ request.get_host }}/";
+  </script>
+    <script src="{% static 'Interface/layout.js' %}"></script>
+  </body>
+</html>

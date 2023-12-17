@@ -1,0 +1,71 @@
+{% extends 'Visualizer/layout.html' %} {% block title %}Upload{% endblock %} {% block content %}
+{% load static %}
+
+<div class="grid gap-10 m-3 oswald">
+    <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data" style="background-color:#494b5f;" method="post">
+        {% csrf_token %}
+        <div class="bg-gray-300 container rounded" >
+        {{ form }}
+        </div>
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-3"
+                type="submit" id="uploadButton" value="Submit">
+                Upload
+            </button>
+        </div>
+    </form>        
+</div>
+<div class="grid m-3 oswald rounded"  style="background-color:#494b5f;">
+    <h2 id="uploadHeader" class="m-3 text-white text-2xl">{{ message }}</h2>
+    <div id="uploadDiv">
+        {% for file in files %}
+        <div class="bg-gray-300 m-3 files rounded flex justify-between items-center" id="{{file.id}}">
+            <h4 class="py-2 px-2">
+                <i class="fas fa-file mr-2"></i>{{file.name}}
+            </h4>
+            <button class="bg-red-500 text-gray-200 m-3 rounded" onclick="deleteFile(this)"><p class="m-2">Delete File</p></button>
+        </div>        
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    var csrftoken = getCookie('csrftoken');
+    
+    function deleteFile(button){
+        let fileId = button.parentElement.id;
+        fetch(`/delete_file/${fileId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken  // assuming you have a variable csrftoken with the CSRF token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            location.reload();
+            console.log(data)
+        });
+        
+    }
+</script>
+
+{% block script %}
+<script src="{% static 'Interface/upload.js' %}"></script>
+{% endblock %}
+{% endblock %}

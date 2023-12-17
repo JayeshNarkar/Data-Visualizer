@@ -1,0 +1,63 @@
+{% extends 'Visualizer/layout.html' %} {% block title %}Index{% endblock %} {% block content %}
+{% load static %}
+<div class="grid gap-10">
+    <div class="card m-3 rounded-lg" style="background-color:#494b5f;">
+        <canvas id="myChart" height="50" class="m-2"></canvas>
+        <div class="m-4">
+            <p class="ft-big text-white hover:text-gray-300 oswald">{{name}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-3">
+    <div class="col-span-1">
+        <div class="card m-3 rounded-lg" style="background-color:#494b5f;">
+            <p class="text-xl font-bold text-white oswald p-3">Highest balance so far:</p>
+            <div class="font-bold p-3 text-center">
+                <div class="p-4 rounded-lg shadow-md" style="background-color:#d1d5db;">
+                    <p class="text-3xl font-bold text-gray-800" style="text-shadow: 0 0 10px #000;">{{highest_balance_amount}}</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-left font-bold ml-3">On {{highest_balance_date}}</p>
+        </div>
+    </div>    
+    <div class="col-span-1">
+        <div class="card m-3 rounded-lg" style="background-color:#494b5f;">
+            <p class="text-xl font-bold text-white oswald p-3">Change this year:</p>
+            <div class="font-bold p-3 text-center">
+                <div class="p-4 rounded-lg shadow-md" style="background-color:#d1d5db;">
+                    <p class="text-3xl font-bold text-gray-800" style="text-shadow: 0 0 10px #000;">
+                        {% if current_year_change > 100%}<i class="fas fa-arrow-up text-green-500" style="text-shadow: none;"></i>{% elif current_year_change == 100 %}<i class="fas fa-arrows-h text-black" style="text-shadow: none;"></i>{% else %}<i class="fas fa-arrow-down text-red-500" style="text-shadow: none;"></i>{% endif %}
+                        {{current_year_change}}%
+                    </p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-left font-bold ml-3">From {{first_balance}} to {{last_balance}}</p>
+        </div>
+    </div>
+    <div class="col-span-1">
+        <div class="card m-3 rounded-lg" style="background-color:#494b5f;">
+            <p class="text-xl font-bold text-white oswald p-3">Change All time:</p>
+            <div class="font-bold p-3 text-center">
+                <div class="p-4 rounded-lg shadow-md" style="background-color:#d1d5db;">
+                    <p class="text-3xl font-bold text-gray-800" style="text-shadow: 0 0 10px #000;">
+                        {% if all_time_change > 100%}<i class="fas fa-arrow-up text-green-500" style="text-shadow: none;"></i>{% elif current_year_change == 100 %}<i class="fas fa-arrows-h text-black" style="text-shadow: none;"></i>{% else %}<i class="fas fa-arrow-down text-red-500" style="text-shadow: none;"></i>{% endif %}
+                        {{all_time_change}}%
+                    </p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-left font-bold ml-3">From {{first_date_balance}} to {{last_balance}}</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dataset = {{dataset | safe}}
+    const chart_name = "{{name}}"
+    const labels = {{label | safe}}
+</script>
+{% block script %}
+<script src="{% static 'Interface/index.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

@@ -4,30 +4,23 @@ This Django project, named **Data Visualizer**, aims to provide a platform for d
 
 ## Preview
 
-
-#### Register
+**Register**
 ![Register image](ignore/Register.png)
-
 
 #### Login
 ![Login image](ignore/Login.png)
 
-
-#### Pre built index
+**Pre built index**
 ![Pre built index image](ignore/Data.1.png)
 
-
-#### Upload
+**Upload**
 ![Upload image](ignore/Data.2.png)
 
-
-#### After upload
+**After upload**
 ![After upload image](ignore/Data.3.png)
 
-
-#### User given csv index
+**User given csv index**
 ![User Index image](ignore/Data.4.png)
-
 
 ## Installation
 

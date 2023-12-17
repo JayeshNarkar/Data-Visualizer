@@ -77,6 +77,11 @@ To set up this project locally, follow these steps:
 4. Push to the branch: `git push origin feature-name`
 5. Submit a pull request.
 
+## Todo
+- [ ]  implement User profile
+- [ ]  implement Add to csv file feature
+- [ ]  Fix changing csv files but Data frame not being changed
+
 ## License
 
 Django is distributed under the BSD license. Please see the LICENSE-Django file for details.
